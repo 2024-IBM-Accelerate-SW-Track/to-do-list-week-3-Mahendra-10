@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { unmountComponentAtNode } from 'react-dom';
+import '@testing-library/jest-dom';
 import App from './App';
 
 let container = null;
@@ -15,6 +16,7 @@ afterEach(() => {
   container.remove();
   container = null;
 });
+
 
 test('test that App component doesn\'t render duplicate Task', () => {
   render(<App />);
@@ -105,8 +107,8 @@ test('test that App component renders different colors for past due events', () 
   fireEvent.click(addButton);
 
   // Get the element representing the task
-  const pastDueTask = screen.getByText(/Past Due Task/i);
+  const pastDueTask = screen.getByTestId(/History Test2/i).style.background
 
-  // Check that the task has a different color (you can use inline styles or classes for this)
-  expect(pastDueTask).toHaveStyle('background-color: red'); // Example: assuming past due tasks should be red
+  // Check that the task has a different color 
+  expect(pastDueTask).toBe("rgba(255,0, 0)");
 });
